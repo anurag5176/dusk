@@ -52,9 +52,9 @@ export default function HomePage() {
   return (
     <div className="min-h-screen theme-transition">
       {/* Hero Section with Enhanced Twinkling Stars */}
-      <section ref={heroRef} className="relative h-screen flex items-center justify-center overflow-hidden">
+      <section ref={heroRef} className="relative h-screen flex flex-col items-center justify-end overflow-hidden pb-8">
         {/* Enhanced Sharp Twinkling Star Background */}
-        <div className="absolute inset-0 bg-gradient-to-br from-background via-muted/20 to-primary/10">
+        <div className="absolute inset-0 bg-black">
           {/* Sharp Twinkling Stars - Small and Precise */}
           {[...Array(30)].map((_, i) => (
             <div
@@ -98,50 +98,22 @@ export default function HomePage() {
           ))}
         </div>
 
-        {/* Central Motion Graphics Placeholder */}
+        {/* Central Motion Graphics Video */}
         <div className="absolute inset-0 flex items-center justify-center">
-          <div className="motion-graphic-container w-96 h-96 motion-graphic-placeholder rounded-full animate-motion-graphic-pulse">
-            {/* Central Core */}
-            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-16 h-16 bg-gradient-to-br from-primary to-accent rounded-full animate-pulse" />
-
-            {/* Orbiting Elements */}
-            <div className="motion-graphic-orbit w-32 h-32 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-              <div className="motion-graphic-element w-3 h-3 animate-orbit" style={{ animationDelay: "0s" }} />
-            </div>
-            <div className="motion-graphic-orbit w-48 h-48 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-              <div
-                className="motion-graphic-element w-2 h-2 animate-orbit"
-                style={{ animationDelay: "2s", animationDuration: "15s" }}
-              />
-            </div>
-            <div className="motion-graphic-orbit w-64 h-64 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-              <div
-                className="motion-graphic-element w-4 h-4 animate-orbit"
-                style={{ animationDelay: "4s", animationDuration: "25s" }}
-              />
-            </div>
-
-            {/* Floating Particles */}
-            {[...Array(12)].map((_, i) => (
-              <div
-                key={i}
-                className="absolute w-1 h-1 bg-primary rounded-full animate-pulse"
-                style={{
-                  left: `${30 + Math.random() * 40}%`,
-                  top: `${30 + Math.random() * 40}%`,
-                  animationDelay: `${Math.random() * 3}s`,
-                  animationDuration: `${2 + Math.random() * 3}s`,
-                }}
-              />
-            ))}
-          </div>
+          <video
+            autoPlay
+            loop
+            muted
+            playsInline
+            className="w-full h-full object-cover"
+            style={{ opacity: 0.8, width: '80%', height: '80%' }}
+          >
+            <source src="/Motion_graphics.mp4" type="video/mp4" />
+          </video>
         </div>
 
-        {/* Hero Content - Positioned Below Center */}
-        <div className="relative z-10 text-center max-w-4xl mx-auto px-4 mt-48">
-          <h1 className="text-5xl md:text-7xl font-bold mb-8 text-glow animate-fade-in-up tracking-wider">
-            SMARTER WORK STARTS AFTER DUSK
-          </h1>
+        {/* Hero Content - Positioned in Center */}
+        <div className="relative z-10 text-center max-w-4xl mx-auto px-4">
           <Button
             size="lg"
             className="bg-gradient-to-r from-primary to-accent text-accent-foreground font-semibold text-lg px-8 py-4 hover:element-glow-effect transition-all duration-300 transform hover:scale-105 animate-fade-in-up"
@@ -150,13 +122,6 @@ export default function HomePage() {
             Discover Automation
             <ArrowRight className="ml-2" size={20} />
           </Button>
-        </div>
-
-        {/* Scroll Indicator */}
-        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
-          <div className="w-6 h-10 border-2 border-primary rounded-full flex justify-center">
-            <div className="w-1 h-3 bg-primary rounded-full mt-2 animate-pulse" />
-          </div>
         </div>
       </section>
 
