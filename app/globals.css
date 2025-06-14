@@ -1,0 +1,405 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 220 17% 97%;
+    --foreground: 240 0% 5%;
+    --card: 220 17% 95%;
+    --card-foreground: 240 0% 5%;
+    --popover: 220 17% 95%;
+    --popover-foreground: 240 0% 5%;
+    --primary: 262 100% 62%;
+    --primary-foreground: 220 17% 97%;
+    --secondary: 220 17% 90%;
+    --secondary-foreground: 240 0% 5%;
+    --muted: 220 17% 92%;
+    --muted-foreground: 240 0% 40%;
+    --accent: 270 100% 72%;
+    --accent-foreground: 240 0% 5%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 220 17% 97%;
+    --border: 220 17% 85%;
+    --input: 220 17% 90%;
+    --ring: 262 100% 62%;
+    --radius: 0.75rem;
+
+    /* Cursor spotlight */
+    --cursor-spotlight-size: 300px;
+    --cursor-spotlight-opacity: 0.08;
+  }
+
+  .dark {
+    --background: 240 0% 5%;
+    --foreground: 220 17% 97%;
+    --card: 230 13% 9%;
+    --card-foreground: 220 17% 97%;
+    --popover: 230 13% 9%;
+    --popover-foreground: 220 17% 97%;
+    --primary: 262 100% 62%;
+    --primary-foreground: 220 17% 97%;
+    --secondary: 230 13% 9%;
+    --secondary-foreground: 220 17% 97%;
+    --muted: 231 14% 20%;
+    --muted-foreground: 220 10% 67%;
+    --accent: 270 100% 72%;
+    --accent-foreground: 240 0% 5%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 220 17% 97%;
+    --border: 231 14% 15%;
+    --input: 231 14% 20%;
+    --ring: 262 100% 62%;
+
+    /* Adjust cursor spotlight for dark mode */
+    --cursor-spotlight-opacity: 0.12;
+  }
+
+  * {
+    @apply border-border transition-colors;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: "Founders Grotesk", "Geist Sans", "Inter", "Satoshi", "system-ui", "-apple-system", "Helvetica Neue",
+      "Arial", "sans-serif";
+    transition: background-color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  /* Custom Cursor Spotlight - Always show system cursor */
+  .cursor-spotlight {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: var(--cursor-spotlight-size);
+    height: var(--cursor-spotlight-size);
+    pointer-events: none;
+    z-index: 9999;
+    border-radius: 50%;
+    background: radial-gradient(
+      circle,
+      rgba(255, 255, 255, var(--cursor-spotlight-opacity)) 0%,
+      rgba(255, 255, 255, calc(var(--cursor-spotlight-opacity) * 0.6)) 25%,
+      rgba(255, 255, 255, calc(var(--cursor-spotlight-opacity) * 0.3)) 50%,
+      transparent 75%
+    );
+    transform: translate(-50%, -50%);
+    transition: opacity 0.2s ease-out;
+    mix-blend-mode: screen;
+  }
+
+  .cursor-spotlight.hidden {
+    opacity: 0;
+  }
+}
+
+@layer components {
+  /* Enhanced text glow effect with purple theme */
+  .text-glow {
+    text-shadow: 0 0 10px hsla(var(--primary), 0.7), 0 0 20px hsla(var(--primary), 0.5);
+  }
+
+  .element-glow-effect {
+    box-shadow: 0 0 15px hsla(var(--primary), 0.4), 0 0 30px hsla(var(--primary), 0.2);
+  }
+
+  .border-glow-effect {
+    border: 1px solid hsla(var(--primary), 0.3);
+    box-shadow: 0 0 20px hsla(var(--primary), 0.15), 0 0 40px hsla(var(--primary), 0.1);
+  }
+
+  /* Enhanced Twinkling Stars with purple theme */
+  .twinkling-star {
+    position: absolute;
+    background: hsl(var(--primary));
+    border-radius: 50%;
+    animation: twinkle-sharp 2s ease-in-out infinite;
+  }
+
+  .twinkling-star::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 400%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, hsl(var(--primary)), transparent);
+    animation: star-beam-sharp 3s ease-in-out infinite;
+  }
+
+  .twinkling-star::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(90deg);
+    width: 400%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, hsl(var(--accent)), transparent);
+    animation: star-beam-sharp 3s ease-in-out infinite 0.5s;
+  }
+
+  /* Booking Section Scroll Animation with purple theme */
+  .booking-section {
+    background: linear-gradient(
+      135deg,
+      hsl(var(--background)) 0%,
+      hsla(var(--primary), 0.05) 25%,
+      hsla(var(--accent), 0.08) 50%,
+      hsla(var(--primary), 0.05) 75%,
+      hsl(var(--background)) 100%
+    );
+    background-size: 400% 400%;
+    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .booking-section.in-view {
+    background-position: 100% 100%;
+    animation: booking-gradient-flow 4s ease-in-out infinite;
+  }
+
+  /* Theme Transition */
+  .theme-transition {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .card-3d {
+    transform-style: preserve-3d;
+    transition: transform 0.3s ease-out;
+  }
+
+  .card-3d:hover {
+    transform: rotateY(2deg) rotateX(2deg) translateZ(10px);
+  }
+
+  .motion-graphic-placeholder {
+    background: radial-gradient(
+      circle at center,
+      hsla(var(--primary), 0.3) 0%,
+      hsla(var(--accent), 0.2) 30%,
+      hsla(var(--primary), 0.1) 60%,
+      transparent 100%
+    );
+    border: 2px solid hsla(var(--primary), 0.4);
+    backdrop-filter: blur(10px);
+  }
+
+  .scroll-reveal {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+
+  .animate-fade-in-up {
+    animation: fade-in-up 0.8s ease-out forwards;
+  }
+
+  /* Content Section Outlines */
+  .content-section {
+    border: 1px solid hsla(var(--primary), 0.2);
+    border-radius: var(--radius);
+    background: hsla(var(--card), 0.8);
+    backdrop-filter: blur(10px);
+  }
+
+  .content-section:hover {
+    border-color: hsla(var(--primary), 0.4);
+    box-shadow: 0 0 20px hsla(var(--primary), 0.1);
+  }
+}
+
+/* Custom scrollbar with purple theme */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: hsl(var(--background));
+}
+
+::-webkit-scrollbar-thumb {
+  background: hsl(var(--primary));
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--accent));
+}
+
+/* Enhanced Animations */
+@keyframes twinkle-sharp {
+  0%,
+  100% {
+    opacity: 0.3;
+    transform: scale(1);
+  }
+  25% {
+    opacity: 1;
+    transform: scale(1.5);
+  }
+  50% {
+    opacity: 0.7;
+    transform: scale(1.2);
+  }
+  75% {
+    opacity: 1;
+    transform: scale(1.8);
+  }
+}
+
+@keyframes star-beam-sharp {
+  0%,
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scaleX(0);
+  }
+  50% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scaleX(1);
+  }
+}
+
+@keyframes booking-gradient-flow {
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+@keyframes fade-in-up {
+  0% {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes motion-graphic-pulse {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+  50% {
+    transform: scale(1.05);
+    opacity: 1;
+  }
+}
+
+@keyframes orbit {
+  0% {
+    transform: rotate(0deg) translateX(100px) rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg) translateX(100px) rotate(-360deg);
+  }
+}
+
+/* Enhanced 3D Effects and Animations */
+.perspective-1000 {
+  perspective: 1000px;
+}
+
+.preserve-3d {
+  transform-style: preserve-3d;
+}
+
+.transform-gpu {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
+/* Universal Hover Transitions */
+button,
+a,
+.interactive {
+  transition: all 0.3s ease-in-out;
+}
+
+.card,
+.hover-card {
+  transition: all 0.3s ease-in-out;
+}
+
+/* Floating Animation */
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.float-animation {
+  animation: float 3s ease-in-out infinite;
+}
+
+/* Pulse Glow Effect */
+@keyframes pulse-glow {
+  0%,
+  100% {
+    box-shadow: 0 0 20px hsla(var(--primary), 0.3);
+  }
+  50% {
+    box-shadow: 0 0 40px hsla(var(--primary), 0.6);
+  }
+}
+
+.pulse-glow {
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+/* Motion Graphics Styles */
+.motion-graphic-container {
+  position: relative;
+  overflow: hidden;
+}
+
+.motion-graphic-element {
+  position: absolute;
+  border-radius: 50%;
+  background: linear-gradient(45deg, hsl(var(--primary)), hsl(var(--accent)));
+}
+
+.motion-graphic-orbit {
+  position: absolute;
+  border: 1px solid hsla(var(--primary), 0.2);
+  border-radius: 50%;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .cursor-spotlight {
+    --cursor-spotlight-size: 250px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cursor-spotlight {
+    transition: none;
+  }
+
+  .twinkling-star,
+  .motion-graphic-element,
+  .animate-fade-in-up,
+  .booking-section {
+    animation: none;
+  }
+
+  .theme-transition {
+    transition: none;
+  }
+}
