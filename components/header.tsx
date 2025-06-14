@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { ThemeToggle } from "@/components/theme-toggle"
 import { Menu, X } from "lucide-react"
+import Image from "next/image"
 
 export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false)
@@ -37,11 +38,15 @@ export default function Header() {
       <div className="container mx-auto px-4 py-4">
         <div className="flex items-center justify-between">
           {/* Logo */}
-          <Link href="/" className="flex items-center space-x-2 group">
-            <div className="w-8 h-8 bg-gradient-to-br from-primary to-accent rounded-lg flex items-center justify-center group-hover:element-glow-effect transition-all duration-300">
-              <span className="text-accent-foreground font-bold text-lg">D</span>
-            </div>
-            <span className="text-xl font-bold text-glow">Dusk AI</span>
+          <Link href="/" className="flex items-center group">
+            <Image
+              src="/placeholder-logo.png"
+              alt="Dusk AI Logo"
+              width={120}
+              height={120}
+              className="group-hover:element-glow-effect transition-all duration-300 object-contain"
+              priority
+            />
           </Link>
 
           {/* Desktop Navigation */}
